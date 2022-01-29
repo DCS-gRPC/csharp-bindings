@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Company>Jeffrey Jones</Company>
+		<Description>C# language bindings for the DCS-gRPC project</Description>
+		<Version>0.3.0</Version>
+		<Copyright>Copyright (c) Jeffrey Jones 2022</Copyright>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/DCS-gRPC/csharp-bindings</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/DCS-gRPC</PackageProjectUrl>
+		<PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+		<AssemblyName>RurouniJones.Dcs.Grpc</AssemblyName>
+		<RootNamespace>RurouniJones.Dcs.Grpc</RootNamespace>
+		<RepositoryType>git</RepositoryType>
+		<Authors>Jeffrey Jones</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.19.4" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.42.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.43.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Protos\" />
+		<None Remove="Protos\*.proto" />
+		<Protobuf Include="Protos\dcs\**\*.proto" ProtoRoot="Protos" GrpcServices="Client" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="LICENSE.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>

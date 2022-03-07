@@ -2,6 +2,7 @@ syntax = "proto3";
 package dcs.coalition.v0;
 import "dcs/common/v0/common.proto";
 option csharp_namespace = "RurouniJones.Dcs.Grpc.V0.Coalition";
+option go_package = "github.com/DCS-gRPC/go-bindings/dcs/v0/coalition";
 
 // https://wiki.hoggitworld.com/view/DCS_singleton_coalition
 service CoalitionService {
@@ -23,7 +24,7 @@ service CoalitionService {
   rpc GetBullseye(GetBullseyeRequest) returns (GetBullseyeResponse) {}
 
   // https://wiki.hoggitworld.com/view/DCS_func_getPlayers
-  rpc GetPlayers(GetPlayersRequest) returns (GetPlayersResponse) {}
+  rpc GetPlayerUnits(GetPlayerUnitsRequest) returns (GetPlayerUnitsResponse) {}
 }
 
 message AddGroupRequest {
@@ -44,7 +45,7 @@ message AddGroupRequest {
     bool late_activation = 3;
     string name = 4;
     dcs.common.v0.Position position = 5;
-    repeated Point route = 6;
+    repeated Point waypoints = 6;
     uint32 start_time = 7;
     string task = 8;
     bool task_selected = 9;
@@ -62,14 +63,20 @@ message AddGroupRequest {
     Skill skill = 6;
   }
 
-  message ShipGroupTemplate {}
-  message ShipUnitTemplate {}
+  message ShipGroupTemplate {
+  }
+  message ShipUnitTemplate {
+  }
 
-  message HelicopterGroupTemplate {}
-  message HelicopterUnitTemplate {}
+  message HelicopterGroupTemplate {
+  }
+  message HelicopterUnitTemplate {
+  }
 
-  message PlaneGroupTemplate {}
-  message PlaneUnitTemplate {}
+  message PlaneGroupTemplate {
+  }
+  message PlaneUnitTemplate {
+  }
 
   message Point {
     enum AltitudeType {
@@ -78,24 +85,26 @@ message AddGroupRequest {
       ALTITUDE_TYPE_RADIO = 2;
     }
 
-    enum Type {
-      TYPE_UNSPECIFIED = 0;
-      TAKEOFF = 1;
-      TAKEOFF_PARKING = 2;
-      TURNING_POINT = 3;
-      TAKEOFF_PARKING_HOT = 4;
-      LAND = 5;
+    enum PointType {
+      // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+      POINT_TYPE_RANDOM = 0;
+      POINT_TYPE_TAKEOFF = 1;
+      POINT_TYPE_TAKEOFF_PARKING = 2;
+      POINT_TYPE_TURNING_POINT = 3;
+      POINT_TYPE_TAKEOFF_PARKING_HOT = 4;
+      POINT_TYPE_LAND = 5;
     }
 
     dcs.common.v0.Position position = 1;
     AltitudeType altitude_type = 2;
-    Type type = 3;
+    PointType type = 3;
     string action = 4;
     string form = 5;
     double speed = 6;
   }
 
   enum Skill {
+    // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
     SKILL_RANDOM = 0;
     SKILL_AVERAGE = 1;
     SKILL_GOOD = 2;
@@ -104,7 +113,8 @@ message AddGroupRequest {
     SKILL_PLAYER = 5;
   }
 
-  message Task {}
+  message Task {
+  }
 }
 
 message AddGroupResponse {
@@ -113,7 +123,7 @@ message AddGroupResponse {
 
 message GetGroupsRequest {
   dcs.common.v0.Coalition coalition = 1;
-  optional dcs.common.v0.GroupCategory category = 2;
+  dcs.common.v0.GroupCategory category = 2;
 }
 
 message GetGroupsResponse {
@@ -130,10 +140,10 @@ message GetBullseyeResponse {
   dcs.common.v0.Position position = 1;
 }
 
-message GetPlayersRequest {
+message GetPlayerUnitsRequest {
   dcs.common.v0.Coalition coalition = 1;
 }
 
-message GetPlayersResponse {
+message GetPlayerUnitsResponse {
   repeated dcs.common.v0.Unit units = 1;
 }

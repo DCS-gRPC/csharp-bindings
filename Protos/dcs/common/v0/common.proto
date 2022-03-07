@@ -1,6 +1,7 @@
 syntax = "proto3";
 package dcs.common.v0;
 option csharp_namespace = "RurouniJones.Dcs.Grpc.V0.Common";
+option go_package = "github.com/DCS-gRPC/go-bindings/dcs/v0/common";
 
 /**
  * The category the object belongs to
@@ -232,11 +233,12 @@ message Group {
  * Group category enumerator.
  */
 enum GroupCategory {
-  GROUP_CATEGORY_AIRPLANE = 0;
-  GROUP_CATEGORY_HELICOPTER = 1;
-  GROUP_CATEGORY_GROUND = 2;
-  GROUP_CATEGORY_SHIP = 3;
-  GROUP_CATEGORY_TRAIN = 4;
+  GROUP_CATEGORY_UNSPECIFIED = 0;
+  GROUP_CATEGORY_AIRPLANE = 1;
+  GROUP_CATEGORY_HELICOPTER = 2;
+  GROUP_CATEGORY_GROUND = 3;
+  GROUP_CATEGORY_SHIP = 4;
+  GROUP_CATEGORY_TRAIN = 5;
 }
 
 /**
@@ -261,12 +263,30 @@ message Weapon {
  * These objects are often buildings but can also be vehicles that have no AI or
  * other game behaviour aside from being destroyable
  */
-message Static {}
+message Static {
+  // The DCS generated ID
+  uint32 id = 1;
+  // The DCS type-name of the static
+  string type = 2;
+  // The name of the static
+  string name = 3;
+  // The coalition the static belongs to
+  Coalition coalition = 4;
+  // The position of the static
+  Position position = 5;
+}
 
 /**
  * An instance of a DCS scenery object
  */
-message Scenery {}
+message Scenery {
+  // The DCS type-name of the scenery
+  string type = 1;
+  // The name of the scenery
+  string name = 2;
+  // The position of the scenery
+  Position position = 3;
+}
 
 /**
  * An instance of a DCS Airfield
@@ -294,7 +314,8 @@ message Airbase {
 /**
  * An instance of a DCS Cargo object
  */
-message Cargo {}
+message Cargo {
+}
 
 /*
  * The initiator of an event

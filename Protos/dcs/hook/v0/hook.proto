@@ -8,9 +8,45 @@ service HookService {
   // https://wiki.hoggitworld.com/view/DCS_func_getMissionName
   rpc GetMissionName(GetMissionNameRequest) returns (GetMissionNameResponse) {}
 
+  // https://wiki.hoggitworld.com/view/DCS_func_getMissionFilename
+  rpc GetMissionFilename(GetMissionFilenameRequest)
+    returns (GetMissionFilenameResponse) {}
+
+  // https://wiki.hoggitworld.com/view/DCS_func_getMissionDescription
+  rpc GetMissionDescription(GetMissionDescriptionRequest)
+    returns (GetMissionDescriptionResponse) {}
+
+  // https://wiki.hoggitworld.com/view/DCS_func_getPause
+  rpc GetPaused(GetPausedRequest) returns (GetPausedResponse) {}
+
+  // https://wiki.hoggitworld.com/view/DCS_func_setPause
+  rpc SetPaused(SetPausedRequest) returns (SetPausedResponse) {}
+
+  // https://wiki.hoggitworld.com/view/DCS_func_stopMission
+  rpc StopMission(StopMissionRequest) returns (StopMissionResponse) {}
+
   // Evaluate some Lua inside of the hook environment and return the result as a
   // JSON string. Disabled by default.
   rpc Eval(EvalRequest) returns (EvalResponse) {}
+
+  // https://wiki.hoggitworld.com/view/DCS_func_exitProcess
+  rpc ExitProcess(ExitProcessRequest) returns (ExitProcessResponse) {}
+
+  // https://wiki.hoggitworld.com/view/DCS_func_isMultiplayer
+  rpc IsMultiplayer(IsMultiplayerRequest) returns (IsMultiplayerResponse) {}
+
+  // https://wiki.hoggitworld.com/view/DCS_func_isServer
+  rpc IsServer(IsServerRequest) returns (IsServerResponse) {}
+
+  // Bans a player that is currently connected to the server
+  rpc BanPlayer(BanPlayerRequest) returns (BanPlayerResponse) {}
+
+  // Unbans a player via their globally unique ID
+  rpc UnbanPlayer(UnbanPlayerRequest) returns (UnbanPlayerResponse) {}
+
+  // Get a list of all the banned players
+  rpc GetBannedPlayers(GetBannedPlayersRequest)
+    returns (GetBannedPlayersResponse) {}
 }
 
 message GetMissionNameRequest {
@@ -20,10 +56,110 @@ message GetMissionNameResponse {
   string name = 1;
 }
 
+message GetMissionFilenameRequest {
+}
+
+message GetMissionFilenameResponse {
+  string name = 1;
+}
+
+message GetMissionDescriptionRequest {
+}
+
+message GetMissionDescriptionResponse {
+  string description = 1;
+}
+
+message GetPausedRequest {
+}
+
+message GetPausedResponse {
+  bool paused = 1;
+}
+
+message SetPausedRequest {
+  bool paused = 1;
+}
+
+message SetPausedResponse {
+}
+
+message StopMissionRequest {
+}
+
+message StopMissionResponse {
+}
+
 message EvalRequest {
   string lua = 1;
 }
 
 message EvalResponse {
   string json = 1;
+}
+
+message ExitProcessRequest {
+}
+
+message ExitProcessResponse {
+}
+
+message IsMultiplayerRequest {
+}
+
+message IsMultiplayerResponse {
+  bool multiplayer = 1;
+}
+
+message IsServerRequest {
+}
+
+message IsServerResponse {
+  bool server = 1;
+}
+
+message BanPlayerRequest {
+  // The session ID of the player
+  uint32 id = 1;
+  // The period of the ban in seconds
+  uint32 period = 2;
+  // The reason for the ban
+  string reason = 3;
+}
+
+message BanPlayerResponse {
+  // Was the player successfully banned
+  bool banned = 1;
+}
+
+message UnbanPlayerRequest {
+  // The globally unique ID of the player
+  string ucid = 1;
+}
+
+message UnbanPlayerResponse {
+  // Was the player successfully unbanned
+  bool unbanned = 1;
+}
+
+message GetBannedPlayersRequest {
+}
+
+message GetBannedPlayersResponse {
+  repeated BanDetails bans = 1;
+}
+
+message BanDetails {
+  // The globally unique ID of the player
+  string ucid = 1;
+  // The IP address the user had when they were banned
+  string ip_address = 2;
+  // The Name of the player at the time of the ban
+  string player_name = 3;
+  // The reason given for the ban
+  string reason = 4;
+  // When the ban was issued in unixtime
+  uint64 banned_from = 5;
+  // When the ban will expire in unixtime
+  uint64 banned_until = 6;
 }

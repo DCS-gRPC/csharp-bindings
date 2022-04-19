@@ -5,7 +5,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>Jeffrey Jones</Company>
 		<Description>C# language bindings for the DCS-gRPC project</Description>
-		<Version>0.4.0</Version>
+		<Version>0.5.0</Version>
 		<Copyright>Copyright (c) Jeffrey Jones 2022</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/DCS-gRPC/csharp-bindings</RepositoryUrl>

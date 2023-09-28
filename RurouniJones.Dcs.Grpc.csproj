@@ -5,7 +5,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>Jeffrey Jones</Company>
 		<Description>C# language bindings for the DCS-gRPC project</Description>
-		<Version>0.7.0</Version>
+		<Version>0.7.1</Version>
 		<Copyright>Copyright (c) Jeffrey Jones 2022</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/DCS-gRPC/csharp-bindings</RepositoryUrl>
@@ -18,9 +18,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Google.Protobuf" Version="3.19.4" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.42.0" />
-		<PackageReference Include="Grpc.Tools" Version="2.43.0">
+		<PackageReference Include="Google.Protobuf" Version="3.24.3" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.57.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.58.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
